@@ -1,0 +1,9 @@
+./auth/auth_env
+
+__pycache__
+
+./frontend/mfrenv
+
+frontend/mfrenv
+
+auth/auth_env
