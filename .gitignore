@@ -2,8 +2,8 @@
 
 __pycache__
 
-./frontend/mfrenv
+./app/mfrenv
 
-frontend/mfrenv
+app/mfrenv
 
 auth/auth_env
