@@ -29,7 +29,6 @@ def process_movie_data():
 	movies['Title'] = movies['Title'].str.split('(').str[0].str.strip()
 	title_to_id_df = movies[['Title', 'MovieID']]
 
-	# 电影Title转数字字典
 	title_set = set()
 	for val in movies['Title'].str.split():
 		title_set.update(val)
@@ -37,7 +36,6 @@ def process_movie_data():
 	title_set.add('PADDING')
 	title2int = {val: ii for ii, val in enumerate(title_set)}
 
-	# 将电影Title转成等长数字列表，长度是15
 	title_length = 15
 	title_map = {val: [title2int[row] for row in val.split()] for val in set(movies['Title'])}
 
@@ -48,7 +46,6 @@ def process_movie_data():
 
 	movies['Title'] = movies['Title'].map(title_map)
 
-	# 电影类型转数字字典
 	genres_set = set()
 	for val in movies['Genres'].str.split('|'):
 		genres_set.update(val)
@@ -56,10 +53,8 @@ def process_movie_data():
 	genres_set.add('PADDING')
 	genres2int = {val: ii for ii, val in enumerate(genres_set)}
 
-	# 将电影类型转成等长数字列表
 	genres_map = {val: [genres2int[row] for row in val.split('|')] for val in set(movies['Genres'])}
 
-	# 将每个样本的电影类型数字列表处理成相同长度，长度不够用'PADDING'填充
 	for key in genres_map:
 		for cnt in range(max(genres2int.values()) - len(genres_map[key])):
 			genres_map[key].insert(len(genres_map[key]) + cnt, genres2int['PADDING'])
